@@ -1,22 +1,20 @@
 const mergeSort = (arr) => {
-    if (arr.length < 1) return [];
-    if (arr.length === 1) return arr;
+    if (arr.length <= 1) return arr;
     if (arr.length === 2) {
         if (arr[0] > arr[1]) {
             arr.push(arr.shift());
             return arr;
         } else return arr;
     }
-    const midIndex = Math.floor(arr.length / 2);
-    const leftArr = mergeSort(arr.slice(0, midIndex));
-    const rightArr = mergeSort(arr.slice(midIndex));
+    const mid = Math.floor(arr.length / 2);
+    const leftArr = mergeSort(arr.slice(0, mid));
+    const rightArr = mergeSort(arr.slice(mid));
     const sortedArr = [];
-    while (rightArr.length > 0) {
-        if (leftArr[0] > rightArr[0] || leftArr.length === 0) sortedArr.push(rightArr.shift());
-        if (rightArr[0] > leftArr[0] && leftArr[0] !== undefined || rightArr[0] === leftArr[0] && leftArr[0] !== undefined) sortedArr.push(leftArr.shift());
+    while (rightArr.length && leftArr.length) {
+        if (leftArr[0] < rightArr[0]) sortedArr.push(leftArr.shift());
+        else sortedArr.push(rightArr.shift());
     }
-    while (rightArr.length === 0 && leftArr.length > 0) sortedArr.push(leftArr.shift());
-    return sortedArr;
+    return sortedArr.concat(leftArr).concat(rightArr);
 }
 
 console.log(mergeSort([]));
