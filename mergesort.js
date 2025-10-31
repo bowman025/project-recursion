@@ -1,11 +1,5 @@
 const mergeSort = (arr) => {
     if (arr.length <= 1) return arr;
-    if (arr.length === 2) {
-        if (arr[0] > arr[1]) {
-            arr.push(arr.shift());
-            return arr;
-        } else return arr;
-    }
     const mid = Math.floor(arr.length / 2);
     const leftArr = mergeSort(arr.slice(0, mid));
     const rightArr = mergeSort(arr.slice(mid));
